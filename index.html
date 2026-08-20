@@ -1392,6 +1392,137 @@
     .toast.error { border-color: rgba(248,40,90,.3); }
     .toast.info { border-color: rgba(77,124,254,.3); }
 
+
+
+    /* ===== App shell: sidebar + top bar ===== */
+    body.has-shell { padding: 0; }
+    .shell { display: grid; grid-template-columns: 258px minmax(0, 1fr); height: 100vh; background: var(--surface); }
+    .shell.nav-collapsed { grid-template-columns: 64px minmax(0, 1fr); }
+
+    .side { display: flex; flex-direction: column; min-height: 0; background: var(--card); border-right: 1px solid var(--border); }
+    .side-brand { display: flex; align-items: center; gap: 10px; height: 62px; padding: 0 14px; border-bottom: 1px solid var(--border); }
+    .side-logo { width: 30px; height: 30px; flex: 0 0 auto; border-radius: 50%; background: var(--warning); color: #fff; display: grid; place-items: center; font-size: 15px; font-weight: 800; }
+    .side-name { flex: 1; min-width: 0; font-size: 13px; font-weight: 700; color: var(--heading); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .side-collapse { width: 24px; height: 24px; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 6px; background: transparent; color: var(--subtle); cursor: pointer; }
+    .side-collapse:hover { background: var(--surface); color: var(--heading); }
+    .shell.nav-collapsed .side-name, .shell.nav-collapsed .side-label, .shell.nav-collapsed .side-foot { display: none; }
+    .shell.nav-collapsed .side-brand { justify-content: center; padding: 0; }
+    .shell.nav-collapsed .side-collapse { display: none; }
+    .shell.nav-collapsed .side-item { justify-content: center; padding: 0; }
+    .shell.nav-collapsed .side-item span:last-child { display: none; }
+
+    .side-nav { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; padding: 14px 10px; }
+    .side-label { padding: 14px 10px 6px; color: var(--subtle); font-size: 10px; font-weight: 700; }
+    .side-nav > .side-label:first-child { padding-top: 0; }
+    .side-item { width: 100%; height: 38px; display: flex; align-items: center; gap: 12px; padding: 0 12px; border: 0; border-radius: 8px; background: transparent; color: var(--heading); font-size: 13px; font-weight: 600; text-align: left; cursor: pointer; transition: background .12s ease, color .12s ease; }
+    .side-item:hover { background: var(--surface); }
+    .side-item.active { color: var(--warning); }
+    .side-icon { width: 18px; height: 18px; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; color: var(--subtle); }
+    .side-item.active .side-icon { color: var(--warning); }
+    .side-icon svg { width: 17px; height: 17px; display: block; }
+    .side-foot { padding: 12px 14px; border-top: 1px solid var(--border-light); color: var(--subtle); font-size: 10px; text-align: center; }
+
+    .main { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+    .topbar { display: flex; align-items: center; gap: 10px; height: 62px; flex: 0 0 auto; padding: 0 18px; background: var(--card); border-bottom: 1px solid var(--border); }
+    .topbar-title { font-size: 20px; font-weight: 700; color: var(--heading); letter-spacing: -.01em; }
+    .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .top-select { height: 34px; padding: 0 10px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--body); font-size: 12px; font-weight: 600; cursor: pointer; }
+    .top-select:hover { border-color: var(--primary); color: var(--primary); }
+    .top-btn { height: 34px; padding: 0 12px; display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--body); font-size: 12px; font-weight: 700; cursor: pointer; }
+    .top-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .top-btn.accent { background: var(--warning); border-color: var(--warning); color: #fff; }
+    .top-btn.accent:hover { background: #f09a1c; border-color: #f09a1c; color: #fff; }
+    .top-icon { position: relative; width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 8px; background: transparent; color: var(--body); cursor: pointer; }
+    .top-icon:hover { background: var(--surface); color: var(--heading); }
+    .top-icon svg { width: 17px; height: 17px; display: block; }
+    .top-dot { position: absolute; top: 7px; right: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--destructive); border: 1.5px solid var(--card); }
+    .top-avatar { width: 32px; height: 32px; flex: 0 0 auto; border-radius: 50%; background: var(--warning-light); color: var(--warning); display: grid; place-items: center; font-size: 11px; font-weight: 800; cursor: pointer; }
+    .main .page { height: auto; flex: 1; min-height: 0; width: 100%; max-width: none; margin: 0; padding: 18px; gap: 14px; }
+
+    /* ===== Multi-Task mode ===== */
+    .mt-zone { display: inline-flex; align-items: center; gap: 8px; }
+    .mt-toggle { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 6px; border: 0; border-radius: 8px; background: transparent; color: var(--body); font-size: 11px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: color .15s ease; }
+    .mt-toggle:hover { color: var(--primary); }
+    .mt-toggle.on { color: var(--primary); }
+    .mt-switch { width: 28px; height: 16px; flex: 0 0 auto; border-radius: 999px; background: #d5dee9; position: relative; transition: background .18s ease; }
+    .mt-toggle.on .mt-switch { background: var(--primary); }
+    .mt-switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 50%; background: #fff; transition: transform .18s ease; }
+    .mt-toggle.on .mt-switch::after { transform: translateX(12px); }
+
+    /* inline live timer — reserves its width so nothing shifts when it appears */
+    .mt-live { display: inline-flex; align-items: center; gap: 6px; width: 0; overflow: hidden; opacity: 0; pointer-events: none; transition: width .18s ease, opacity .16s ease; }
+    .mt-zone.show .mt-live { width: 122px; opacity: 1; pointer-events: auto; }
+    .mt-dot { width: 7px; height: 7px; flex: 0 0 auto; border-radius: 50%; background: var(--destructive); animation: mtPulse 1.4s ease-in-out infinite; }
+    .mt-zone.paused .mt-dot { background: var(--warning); animation: none; }
+    @keyframes mtPulse { 0%,100% { opacity: 1 } 50% { opacity: .25 } }
+    .mt-time { flex: 0 0 auto; min-width: 58px; font-family: var(--mono, monospace); font-size: 12px; font-weight: 700; color: var(--heading); font-variant-numeric: tabular-nums; letter-spacing: 0; }
+    .mt-icon-btn { width: 24px; height: 24px; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 6px; background: transparent; color: var(--body); cursor: pointer; transition: background .12s ease, color .12s ease; }
+    .mt-icon-btn:hover { background: var(--surface); color: var(--primary); }
+    .mt-icon-btn.stop { color: var(--destructive); }
+    .mt-icon-btn.stop:hover { background: var(--destructive-light); color: var(--destructive); }
+
+    /* allocation dialog */
+    .mt-modal { width: min(1080px, calc(100vw - 48px)); }
+    #mtModal .panel-head { align-items: center; padding: 16px 22px; }
+    #mtModal .panel-title { font-size: 15px; }
+
+    .mt-head { align-items: center; gap: 18px; }
+    .mt-stats { margin-left: auto; display: inline-flex; align-items: center; gap: 16px; }
+    .mt-stat { display: inline-flex; align-items: baseline; gap: 7px; white-space: nowrap; }
+    .mt-stat-key { color: var(--subtle); font-size: 9px; font-weight: 700; font-style: normal; letter-spacing: .09em; text-transform: uppercase; }
+    .mt-stat-val { font-family: var(--mono, monospace); font-size: 13px; font-weight: 700; color: var(--heading); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+    .mt-stat-val.remain { color: var(--primary); }
+    .mt-stat-val.over { color: var(--destructive); }
+    .mt-stat-sep { width: 1px; height: 12px; background: var(--border-light); }
+
+    .mt-search { padding: 14px 22px 0; }
+    #mtModal .search-shell { height: 34px; }
+
+    .mt-list { height: 46vh; overflow-y: auto; padding: 14px 22px 4px; display: grid; gap: 4px; align-content: start; }
+    #mtModal .mt-list { height: auto; max-height: 46vh; }
+    #mtModal .mt-task .mt-check { background: var(--primary); border-color: var(--primary); }
+    #mtModal .mt-task .mt-check::after { content: ""; width: 5px; height: 9px; border: solid #fff; border-width: 0 1.6px 1.6px 0; transform: rotate(45deg) translate(-1px,-1px); }
+    .mt-task { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; align-items: center; gap: 14px; padding: 8px 12px; border: 1px solid transparent; border-bottom-color: var(--border-light); border-radius: 8px; background: transparent; cursor: pointer; transition: border-color .12s ease, background .12s ease; }
+    .mt-task:hover { background: var(--surface); }
+    .mt-task.picked { border-color: var(--primary); background: var(--primary-light); }
+    .mt-check { width: 17px; height: 17px; border-radius: 5px; border: 1.5px solid #c3ccd8; display: inline-flex; align-items: center; justify-content: center; background: var(--card); }
+    .mt-task.picked .mt-check { background: var(--primary); border-color: var(--primary); }
+    .mt-task.picked .mt-check::after { content: ""; width: 5px; height: 9px; border: solid #fff; border-width: 0 1.6px 1.6px 0; transform: rotate(45deg) translate(-1px,-1px); }
+    .mt-task-main { min-width: 0; display: flex; align-items: center; gap: 8px; }
+    .mt-task-title { font-size: 12px; font-weight: 700; color: var(--heading); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .mt-alloc { display: flex; align-items: center; gap: 6px; justify-self: end; }
+    .mt-dur { display: inline-flex; align-items: center; gap: 3px; height: 30px; padding: 0 8px; border: 1px solid var(--border); border-radius: 7px; background: var(--card); }
+    .mt-dur:focus-within { border-color: var(--primary); }
+    .mt-dur input { width: 26px; height: 26px; border: 0; outline: 0; background: transparent; font-family: var(--mono, monospace); font-size: 12px; font-weight: 700; text-align: right; color: var(--heading); font-variant-numeric: tabular-nums; -moz-appearance: textfield; }
+    .mt-dur input::-webkit-outer-spin-button, .mt-dur input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .mt-dur i { color: var(--subtle); font-size: 10px; font-style: normal; font-weight: 700; margin-right: 4px; }
+    .mt-memo-btn { height: 30px; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); border-radius: 7px; background: var(--card); font-size: 10px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+    .mt-memo-btn.todo { border-style: dashed; border-color: #d5dee9; color: var(--subtle); }
+    .mt-memo-btn.todo:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+    .mt-memo-btn.done { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+
+    .mt-memo-modal { width: min(520px, calc(100vw - 48px)); z-index: 80; }
+    .mt-memo-scrim { position: fixed; inset: 0; z-index: 70; background: rgba(15, 23, 42, .28); display: none; }
+    .mt-memo-scrim.open { display: block; }
+    #mtMemoModal .panel-head { align-items: center; padding: 16px 20px; }
+    #mtMemoModal .panel-title { font-size: 14px; }
+    .mt-memo-for { margin: 2px 0 0; color: var(--subtle); font-size: 11px; max-width: 380px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    #mtMemoModal .panel-head { align-items: flex-start; }
+    .mt-memo-body { padding: 16px 20px 4px; }
+    .mt-memo-body textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; outline: 0; background: var(--card); color: var(--heading); font-family: inherit; font-size: 12px; line-height: 1.5; resize: vertical; }
+    .mt-memo-body textarea:focus { border-color: var(--primary); }
+    .mt-memo-hint { margin: 8px 0 0; color: var(--subtle); font-size: 11px; }
+    .mt-foot { display: flex; align-items: center; gap: 10px; padding: 14px 22px; border-top: 1px solid var(--border); }
+    .mt-foot-note { color: var(--subtle); font-size: 11px; }
+    .mt-foot .mt-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .mt-btn { height: 32px; padding: 0 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--body); font-size: 11px; font-weight: 700; cursor: pointer; }
+    .mt-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .mt-btn.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+    .mt-btn.primary:hover { background: var(--primary-hover); color: #fff; }
+    .mt-empty { padding: 24px; text-align: center; color: var(--subtle); font-size: 12px; }
+    .mt-pick-count { margin-left: auto; color: var(--primary); font-size: 11px; font-weight: 700; }
+
     .hidden-col { display: none !important; }
     .view-board .list-wrap { display: none; }
     .view-board .board { display: block; }
@@ -1429,7 +1560,58 @@
     }
   </style>
 </head>
-<body>
+<body class="has-shell">
+<div class="shell" id="appShell">
+  <aside class="side">
+    <div class="side-brand">
+      <span class="side-logo">T</span>
+      <span class="side-name">ThinkTanker Techno...</span>
+      <button class="side-collapse" id="navCollapse" type="button" title="Collapse" aria-label="Collapse sidebar">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <nav class="side-nav">
+      <div class="side-label">Work</div>
+      <button class="side-item active" data-shell-nav="tasks" type="button">
+        <span class="side-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="2.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.6 8.2 7.2 9.8l3.4-3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span>Tasks</span>
+      </button>
+      <button class="side-item" data-shell-nav="todo" type="button">
+        <span class="side-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 4.2h7.5M6 8h7.5M6 11.8h7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="3" cy="4.2" r="1.1" fill="currentColor"/><circle cx="3" cy="8" r="1.1" fill="currentColor"/><circle cx="3" cy="11.8" r="1.1" fill="currentColor"/></svg></span>
+        <span>ToDo</span>
+      </button>
+    </nav>
+    <div class="side-foot">© 2026 Powered by WORKMAGIX v1.0.2</div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <h1 class="topbar-title" id="shellTitle">Tasks</h1>
+      <div class="topbar-right">
+        <button class="top-select" type="button">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 5.2c0-.7.6-1.2 1.2-1.2h2.1l1.2 1.4h5.3c.7 0 1.2.6 1.2 1.2v5.2c0 .7-.6 1.2-1.2 1.2H3.7c-.7 0-1.2-.6-1.2-1.2V5.2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+          Select Project
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true" style="margin-left:14px"><path d="M4.5 6.5 8 10l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="top-btn" type="button">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.5" y="2.5" width="4.6" height="4.6" rx="1.2" stroke="currentColor" stroke-width="1.3"/><rect x="8.9" y="2.5" width="4.6" height="4.6" rx="1.2" stroke="currentColor" stroke-width="1.3"/><rect x="2.5" y="8.9" width="4.6" height="4.6" rx="1.2" stroke="currentColor" stroke-width="1.3"/><rect x="8.9" y="8.9" width="4.6" height="4.6" rx="1.2" stroke="currentColor" stroke-width="1.3"/></svg>
+          Dashboard
+        </button>
+        <button class="top-btn accent" type="button">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.2" y="4.6" width="11.6" height="8.2" rx="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M6 4.6V3.4c0-.5.4-.9.9-.9h2.2c.5 0 .9.4.9.9v1.2" stroke="currentColor" stroke-width="1.3"/></svg>
+          Work
+        </button>
+        <button class="top-btn" type="button">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="5.8" r="2.6" stroke="currentColor" stroke-width="1.3"/><path d="M3.2 13.2a4.8 4.8 0 0 1 9.6 0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          HR
+        </button>
+        <button class="top-icon" type="button" aria-label="Messages"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.5 9.5c0 .8-.6 1.4-1.4 1.4H6.3L3.2 13.4V4.1c0-.8.6-1.4 1.4-1.4h7.5c.8 0 1.4.6 1.4 1.4v5.4Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></button>
+        <button class="top-icon" type="button" aria-label="Notifications"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6.5a4 4 0 1 1 8 0c0 2.3.5 3.4 1 4H3c.5-.6 1-1.7 1-4Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M6.5 13a1.6 1.6 0 0 0 3 0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="top-dot"></span></button>
+        <button class="top-icon" type="button" aria-label="Theme"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.2 9.6A5.6 5.6 0 0 1 6.4 2.8a5.6 5.6 0 1 0 6.8 6.8Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg></button>
+        <span class="top-avatar">SL</span>
+      </div>
+    </header>
+
   <div class="page" id="appRoot">
     <div class="toolbar">
       <div class="search-wrap" id="searchWrap">
@@ -1531,6 +1713,22 @@
             <div class="columns-note">Task and actions are always shown.</div>
           </div>
         </div>
+
+        <div class="mt-zone" id="mtBar">
+          <button class="mt-toggle" id="mtToggle" type="button" title="Multi-Task mode" aria-pressed="false"><span class="mt-switch"></span><span class="mt-toggle-text">Multi-Task</span></button>
+          <span class="mt-live" id="mtLive">
+            <span class="mt-dot"></span>
+            <span class="mt-time" id="mtTime">00:00:00</span>
+            <button class="mt-icon-btn" id="mtPause" type="button" title="Pause" aria-label="Pause">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.5v9M10 3.5v9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </button>
+            <button class="mt-icon-btn stop" id="mtStop" type="button" title="Stop &amp; log" aria-label="Stop and log">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="4" y="4" width="8" height="8" rx="1.4" fill="currentColor"/></svg>
+            </button>
+          </span>
+          <span class="mt-label" id="mtLabel" hidden>Recording</span>
+          <span class="mt-hint" id="mtHint" hidden></span>
+        </div>
       </div>
     </div>
 
@@ -1589,7 +1787,72 @@
     </div>
   </div>
 
+  </div><!-- /.main -->
+  </div><!-- /.shell -->
+
   <div class="overlay" id="overlay"></div>
+
+  <div class="modal mt-modal" id="mtPickModal">
+    <div class="panel-head mt-head">
+      <h2 class="panel-title">Select tasks</h2>
+      <span class="mt-pick-count" id="mtPickCount">0 selected</span>
+      <button class="close-btn" id="mtPickClose">✕</button>
+    </div>
+    <div class="mt-search">
+      <div class="search-shell">
+        <span class="search-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"></circle><path d="M10.8 10.8L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg></span>
+        <input id="mtPickSearch" type="text" placeholder="Search or filter tasks..." autocomplete="off">
+      </div>
+    </div>
+    <div class="mt-list" id="mtPickList"></div>
+    <div class="mt-foot">
+      <span class="mt-foot-note" id="mtPickNote">Select at least 2 tasks to start.</span>
+      <div class="mt-actions">
+        <button class="mt-btn" id="mtPickCancel" type="button">Cancel</button>
+        <button class="mt-btn primary" id="mtPickStart" type="button">Start tracking</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-memo-scrim" id="mtMemoScrim"></div>
+  <div class="modal mt-memo-modal" id="mtMemoModal">
+    <div class="panel-head">
+      <div><h2 class="panel-title">Memo</h2><p class="mt-memo-for" id="mtMemoTitle"></p></div>
+      <button class="close-btn" id="mtMemoClose">✕</button>
+    </div>
+    <div class="mt-memo-body">
+      <textarea id="mtMemoText" rows="4" placeholder="What did you work on for this task?"></textarea>
+      <p class="mt-memo-hint">A memo is required for every task you log time against.</p>
+    </div>
+    <div class="mt-foot">
+      <div class="mt-actions">
+        <button class="mt-btn" id="mtMemoCancel" type="button">Cancel</button>
+        <button class="mt-btn primary" id="mtMemoSave" type="button">Save memo</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal mt-modal" id="mtModal">
+    <div class="panel-head mt-head">
+      <h2 class="panel-title">Log time</h2>
+      <div class="mt-stats">
+        <span class="mt-stat"><i class="mt-stat-key">Tracked</i><b class="mt-stat-val" id="mtTotalOut">00:00:00</b></span>
+        <span class="mt-stat-sep"></span>
+        <span class="mt-stat"><i class="mt-stat-key">Allocated</i><b class="mt-stat-val" id="mtAllocOut">00:00:00</b></span>
+        <span class="mt-stat-sep"></span>
+        <span class="mt-stat"><i class="mt-stat-key">Remaining</i><b class="mt-stat-val remain" id="mtRemainOut">00:00:00</b></span>
+      </div>
+      <button class="close-btn" data-close-modal="mtModal">✕</button>
+    </div>
+    <div class="mt-list" id="mtList"></div>
+    <div class="mt-foot">
+      <span class="mt-foot-note" id="mtFootNote">Select tasks to begin.</span>
+      <div class="mt-actions">
+        <button class="mt-btn" id="mtDiscard" type="button">Discard</button>
+        <button class="mt-btn primary" id="mtSave" type="button">Log time</button>
+      </div>
+    </div>
+  </div>
 
   <div class="modal" id="taskModal">
     <div class="panel-head">
@@ -2831,8 +3094,441 @@
       }
     });
 
+
+    /* ================= Multi-Task mode ================= */
+    const mt = {
+      on: false, running: false, startedAt: 0, accumulated: 0,
+      tick: null, picks: new Map(), search: '',
+      session: [], pickSel: new Set(), pickSearch: ''
+    };
+    const mtUI = {
+      toggle: document.getElementById('mtToggle'),
+      bar: document.getElementById('mtBar'),
+      time: document.getElementById('mtTime'),
+      label: document.getElementById('mtLabel'),
+      hint: document.getElementById('mtHint'),
+      pause: document.getElementById('mtPause'),
+      stop: document.getElementById('mtStop'),
+      modal: document.getElementById('mtModal'),
+      list: document.getElementById('mtList'),
+      totalOut: document.getElementById('mtTotalOut'),
+      allocOut: document.getElementById('mtAllocOut'),
+      remainOut: document.getElementById('mtRemainOut'),
+      footNote: document.getElementById('mtFootNote'),
+      save: document.getElementById('mtSave'),
+      discard: document.getElementById('mtDiscard')
+    };
+
+    const mtEsc = (v) => String(v ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const pad2 = (n) => String(n).padStart(2, '0');
+    function secsToHMS(total) {
+      total = Math.max(0, Math.round(total));
+      return `${pad2(Math.floor(total / 3600))}:${pad2(Math.floor((total % 3600) / 60))}:${pad2(total % 60)}`;
+    }
+    function hmsToSecs(text) {
+      const parts = String(text || '').trim().split(':').map((x) => parseInt(x, 10) || 0);
+      if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+      if (parts.length === 2) return parts[0] * 60 + parts[1];
+      return parts[0] || 0;
+    }
+    function mtElapsedSecs() {
+      return mt.accumulated + (mt.running ? (Date.now() - mt.startedAt) / 1000 : 0);
+    }
+
+    function mtRenderClock() {
+      mtUI.time.textContent = secsToHMS(mtElapsedSecs());
+    }
+
+    function mtStart() {
+      mt.on = true;
+      mt.running = true;
+      mt.startedAt = Date.now();
+      mt.accumulated = 0;
+      mtUI.toggle.classList.add('on');
+      mtUI.toggle.setAttribute('aria-pressed', 'true');
+      mtUI.bar.classList.add('show');
+      mtUI.bar.classList.remove('paused');
+      mtUI.pause.innerHTML = `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.5v9M10 3.5v9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`;
+      mtUI.pause.title = 'Pause';
+      mtRenderClock();
+      clearInterval(mt.tick);
+      mt.tick = setInterval(mtRenderClock, 1000);
+    }
+
+    function mtSetRunning(run) {
+      if (run === mt.running) return;
+      if (run) {
+        mt.startedAt = Date.now();
+        mt.running = true;
+        mtUI.bar.classList.remove('paused');
+        mtUI.pause.innerHTML = `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3.5v9M10 3.5v9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`;
+        mtUI.pause.title = 'Pause';
+        mt.tick = setInterval(mtRenderClock, 1000);
+      } else {
+        mt.accumulated += (Date.now() - mt.startedAt) / 1000;
+        mt.running = false;
+        clearInterval(mt.tick);
+        mtUI.bar.classList.add('paused');
+        mtUI.pause.innerHTML = `<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.5 3.6v8.8l7-4.4-7-4.4Z" fill="currentColor"/></svg>`;
+        mtUI.pause.title = 'Resume';
+      }
+      mtRenderClock();
+    }
+
+    function mtReset() {
+      clearInterval(mt.tick);
+      mt.on = false; mt.running = false; mt.accumulated = 0; mt.startedAt = 0;
+      mt.picks.clear(); mt.search = ''; mt.session = []; mt.pickSel.clear();
+      mtUI.toggle.classList.remove('on');
+      mtUI.toggle.setAttribute('aria-pressed', 'false');
+      mtUI.bar.classList.remove('show', 'paused');
+      mtUI.time.textContent = '00:00:00';
+    }
+
+    /* ---- allocation dialog ---- */
+    function mtTotalSecs() { return Math.round(mt.accumulated); }
+    function mtAllocatedSecs() {
+      let sum = 0;
+      mt.picks.forEach((p) => { sum += p.secs; });
+      return sum;
+    }
+
+    function mtRenderSummary() {
+      const total = mtTotalSecs();
+      const alloc = mtAllocatedSecs();
+      const remain = total - alloc;
+      mtUI.totalOut.textContent = secsToHMS(total);
+      mtUI.allocOut.textContent = secsToHMS(alloc);
+      mtUI.remainOut.textContent = (remain < 0 ? '-' : '') + secsToHMS(Math.abs(remain));
+      mtUI.remainOut.classList.toggle('over', remain < 0);
+
+
+      const n = mt.picks.size;
+      if (!n) mtUI.footNote.textContent = 'Select tasks to begin.';
+      else if (remain > 0) mtUI.footNote.textContent = `${n} task${n === 1 ? '' : 's'} · ${secsToHMS(remain)} still unallocated`;
+      else if (remain < 0) mtUI.footNote.textContent = `Over-allocated by ${secsToHMS(-remain)}`;
+      else mtUI.footNote.textContent = `${n} task${n === 1 ? '' : 's'} · fully allocated`;
+      const missingMemo = [...mt.picks.values()].filter((p) => p.secs > 0 && !p.memo.trim()).length;
+      /* Surface the blocker that actually stops the save, most-blocking first. */
+      if (n && remain > 0) mtUI.footNote.textContent = `${secsToHMS(remain)} left to assign`;
+      else if (n && remain < 0) mtUI.footNote.textContent = `Over by ${secsToHMS(-remain)}`;
+      else if (n && missingMemo) mtUI.footNote.textContent = `${missingMemo} task${missingMemo === 1 ? '' : 's'} still need${missingMemo === 1 ? 's' : ''} a memo`;
+      mtUI.save.disabled = !n || remain !== 0 || missingMemo > 0;
+      mtUI.save.style.opacity = mtUI.save.disabled ? '.5' : '1';
+      mtUI.save.style.cursor = mtUI.save.disabled ? 'not-allowed' : 'pointer';
+    }
+
+    function mtCandidates() {
+      /* Only the tasks chosen when the session started — the set is fixed, so
+         there is nothing to search for and nothing else to pick from. */
+      return mt.session.map((id) => state.tasks.find((t) => t.id === id)).filter(Boolean);
+    }
+
+    function mtRenderList() {
+      const items = mtCandidates();
+      if (!items.length) {
+        mtUI.list.innerHTML = '<div class="mt-empty">No matching tasks.</div>';
+        return;
+      }
+      const hasQuery = Boolean(mt.search.trim());
+      const matchCount = items.filter((t) => !mt.picks.has(t.id)).length;
+      mtUI.list.innerHTML = items.map((t) => {
+        const pick = mt.picks.get(t.id);
+        const on = Boolean(pick);
+        const status = statusVariant(t.status);
+        const memoOk = on && pick.memo.trim();
+        return `<div class="mt-task ${on ? 'picked' : ''}" data-mt-task="${t.id}">
+          <span class="mt-check"></span>
+          <span class="mt-task-main">
+            <span class="mt-task-title">${mtEsc(t.title)}</span>
+            <span class="inline-status" style="color:${status.text};"><span class="dot" style="background:${status.dot};"></span>${mtEsc(t.status.toLowerCase())}</span>
+          </span>
+          <span class="mt-alloc">
+            ${on ? `<button type="button" class="mt-memo-btn ${memoOk ? 'done' : 'todo'}" data-mt-memo-open="${t.id}" title="${memoOk ? mtEsc(pick.memo) : 'Add a memo (required)'}">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3.8h10M3 7h10M3 10.2h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              Memo
+            </button>
+            <span class="mt-dur">
+              <input type="number" min="0" max="99" data-mt-h="${t.id}" value="${Math.floor(pick.secs / 3600)}" aria-label="Hours for ${mtEsc(t.title)}"><i>h</i>
+              <input type="number" min="0" max="59" data-mt-m="${t.id}" value="${Math.floor((pick.secs % 3600) / 60)}" aria-label="Minutes for ${mtEsc(t.title)}"><i>m</i>
+            </span>` : ''}
+          </span>
+        </div>`;
+      }).join('') + ((hasQuery && !matchCount) ? '<div class="mt-empty">No other tasks match that search.</div>' : '');
+      mtBindList();
+    }
+
+    function mtRemainingSecs() { return mtTotalSecs() - mtAllocatedSecs(); }
+
+    /* Spread whatever is unallocated across the tasks the user has NOT typed a
+       time into. With one untouched task it absorbs the whole remainder; with
+       several they split it evenly, so the total always equals what was tracked. */
+    function mtRebalance() {
+      const total = mtTotalSecs();
+      const picks = [...mt.picks.entries()];
+      if (!picks.length) return;
+      const untouched = picks.filter(([, p]) => !p.touched);
+      const usedByTouched = picks.filter(([, p]) => p.touched).reduce((sum, [, p]) => sum + p.secs, 0);
+
+      if (untouched.length) {
+        /* Spread the remainder evenly across tasks the user hasn't set. */
+        const pool = Math.max(0, total - usedByTouched);
+        const share = Math.floor(pool / untouched.length);
+        untouched.forEach(([, p], i) => {
+          p.secs = i === untouched.length - 1 ? pool - share * (untouched.length - 1) : share;
+        });
+        return;
+      }
+
+      /* Every task is user-set. Rather than stranding the difference, give it to
+         whichever task was edited least recently — the user's most recent edit is
+         the one they care about, so it stays exactly as typed. */
+      const diff = total - usedByTouched;
+      if (!diff) return;
+      const ordered = picks.slice().sort((a, b) => (a[1].editedAt || 0) - (b[1].editedAt || 0));
+      const [, victim] = ordered[0];
+      victim.secs = Math.max(0, victim.secs + diff);
+      /* If that overshot (diff was negative and large), trim the rest in order. */
+      let over = mtAllocatedSecs() - total;
+      for (let i = 1; i < ordered.length && over > 0; i += 1) {
+        const p = ordered[i][1];
+        const cut = Math.min(p.secs, over);
+        p.secs -= cut;
+        over -= cut;
+      }
+    }
+
+    function mtBindList() {
+      mtUI.list.querySelectorAll('[data-mt-task]').forEach((row) => {
+        /* The session set is fixed at start, so rows here are not togglable —
+           removing one would strand its time with no way to add it back. */
+        row.addEventListener('click', (e) => {
+          if (e.target.closest('input, .mt-memo-btn')) return;
+          mtOpenMemo(row.dataset.mtTask);
+        });
+      });
+
+      mtUI.list.querySelectorAll('[data-mt-h], [data-mt-m]').forEach((input) => {
+        const id = input.dataset.mtH || input.dataset.mtM;
+        const readRow = () => {
+          const row = input.closest('.mt-task');
+          const h = parseInt(row.querySelector('[data-mt-h]').value, 10) || 0;
+          const m = Math.min(59, parseInt(row.querySelector('[data-mt-m]').value, 10) || 0);
+          return h * 3600 + m * 60;
+        };
+        /* While typing we only update THIS task and the totals. Other rows are
+           left alone so digits don't jump around under the user's eyes. */
+        input.addEventListener('input', () => {
+          const pick = mt.picks.get(id);
+          if (!pick) return;
+          pick.touched = true;
+          pick.editedAt = (mt.editSeq = (mt.editSeq || 0) + 1);
+          let usedByOthers = 0;
+          mt.picks.forEach((p) => { if (p !== pick) usedByOthers += p.secs; });
+          pick.secs = Math.max(0, Math.min(readRow(), mtTotalSecs() - usedByOthers));
+          mtRenderSummary();
+        });
+        /* Rebalance once the user leaves the field — a single settled change. */
+        input.addEventListener('change', () => { mtRebalance(); mtRenderList(); mtRenderSummary(); });
+        input.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); input.blur(); } });
+        input.addEventListener('focus', () => input.select());
+      });
+
+      mtUI.list.querySelectorAll('[data-mt-memo-open]').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          mtOpenMemo(btn.dataset.mtMemoOpen);
+        });
+      });
+    }
+
+    /* push rebalanced values back into the other inputs without losing focus */
+    function mtSyncInputs(exceptEl) {
+      mtUI.list.querySelectorAll('[data-mt-h]').forEach((el) => {
+        if (el === exceptEl) return;
+        const pick = mt.picks.get(el.dataset.mtH);
+        if (pick) el.value = Math.floor(pick.secs / 3600);
+      });
+      mtUI.list.querySelectorAll('[data-mt-m]').forEach((el) => {
+        if (el === exceptEl) return;
+        const pick = mt.picks.get(el.dataset.mtM);
+        if (pick) el.value = Math.floor((pick.secs % 3600) / 60);
+      });
+    }
+
+    /* ---- pre-start task picker ---- */
+    const mtPick = {
+      modal: document.getElementById('mtPickModal'),
+      list: document.getElementById('mtPickList'),
+      search: document.getElementById('mtPickSearch'),
+      count: document.getElementById('mtPickCount'),
+      note: document.getElementById('mtPickNote'),
+      start: document.getElementById('mtPickStart'),
+      cancel: document.getElementById('mtPickCancel'),
+      close: document.getElementById('mtPickClose')
+    };
+
+    function mtPickCandidates() {
+      const q = mt.pickSearch.trim().toLowerCase();
+      const base = state.tasks.filter((t) => t.status !== 'Done');
+      const chosen = base.filter((t) => mt.pickSel.has(t.id));
+      const rest = base.filter((t) => !mt.pickSel.has(t.id) &&
+        (!q || `${t.title} ${t.code} ${t.project} ${t.owner}`.toLowerCase().includes(q)));
+      return [...chosen, ...rest].slice(0, 40);
+    }
+
+    function mtRenderPick() {
+      const items = mtPickCandidates();
+      mtPick.list.innerHTML = items.length ? items.map((t) => {
+        const on = mt.pickSel.has(t.id);
+        const status = statusVariant(t.status);
+        return `<div class="mt-task ${on ? 'picked' : ''}" data-mt-pick="${t.id}">
+          <span class="mt-check"></span>
+          <span class="mt-task-main">
+            <span class="mt-task-title">${mtEsc(t.title)}</span>
+            <span class="inline-status" style="color:${status.text};"><span class="dot" style="background:${status.dot};"></span>${mtEsc(t.status.toLowerCase())}</span>
+          </span>
+          <span></span>
+        </div>`;
+      }).join('') : '<div class="mt-empty">No matching tasks.</div>';
+
+      mtPick.list.querySelectorAll('[data-mt-pick]').forEach((row) => {
+        row.addEventListener('click', () => {
+          const id = row.dataset.mtPick;
+          if (mt.pickSel.has(id)) mt.pickSel.delete(id);
+          else mt.pickSel.add(id);
+          mtRenderPick();
+        });
+      });
+
+      const n = mt.pickSel.size;
+      mtPick.count.textContent = `${n} selected`;
+      mtPick.note.textContent = n === 0 ? 'Select at least 2 tasks to start.'
+        : n === 1 ? 'Select at least 1 more task — Multi-Task needs 2 or more.'
+        : `${n} tasks will be tracked in this session.`;
+      mtPick.start.disabled = n < 2;
+      mtPick.start.style.opacity = n < 2 ? '.5' : '1';
+      mtPick.start.style.cursor = n < 2 ? 'not-allowed' : 'pointer';
+    }
+
+    function mtOpenPicker() {
+      mt.pickSel.clear();
+      mt.pickSearch = '';
+      mtPick.search.value = '';
+      mtRenderPick();
+      openModal('mtPickModal');
+      setTimeout(() => mtPick.search.focus(), 30);
+    }
+    function mtClosePicker() { closeModal('mtPickModal'); }
+
+    let mtMemoTarget = null;
+    function mtOpenMemo(id) {
+      const task = state.tasks.find((t) => t.id === id);
+      const pick = mt.picks.get(id);
+      if (!task || !pick) return;
+      mtMemoTarget = id;
+      document.getElementById('mtMemoTitle').textContent = task.title;
+      const box = document.getElementById('mtMemoText');
+      box.value = pick.memo || '';
+      document.getElementById('mtMemoScrim').classList.add('open');
+      document.getElementById('mtMemoModal').classList.add('open');
+      setTimeout(() => { box.focus(); box.setSelectionRange(box.value.length, box.value.length); }, 30);
+    }
+    function mtCloseMemo() {
+      document.getElementById('mtMemoModal').classList.remove('open');
+      document.getElementById('mtMemoScrim').classList.remove('open');
+      mtMemoTarget = null;
+    }
+    function mtSaveMemo() {
+      const pick = mt.picks.get(mtMemoTarget);
+      if (pick) pick.memo = document.getElementById('mtMemoText').value.trim();
+      mtCloseMemo();
+      mtRenderList();
+      mtRenderSummary();
+    }
+
+    function mtOpenDialog() {
+      mtSetRunning(false);
+      mt.picks.clear();
+      mt.editSeq = 0;
+      /* every session task starts selected with an even split of the tracked time */
+      mt.session.forEach((id) => mt.picks.set(id, { secs: 0, memo: '', touched: false, editedAt: 0 }));
+      mtRebalance();
+      mtRenderList();
+      mtRenderSummary();
+      openModal('mtModal');
+    }
+
+    function mtCommit() {
+      if (!mt.picks.size) return;
+      let logged = 0;
+      mt.picks.forEach((pick, id) => {
+        if (pick.secs <= 0) return;
+        const task = state.tasks.find((t) => t.id === id);
+        if (!task) return;
+        task.elapsed = secsToHMS(hmsToSecs(task.elapsed) + pick.secs);
+        task.progress = task.progress || [];
+        task.progress.push({ name: CURRENT_USER, time: secsToHMS(pick.secs), memo: pick.memo || '', source: 'Multi-Task' });
+        logged += pick.secs;
+      });
+      const count = mt.picks.size;
+      closeModal('mtModal');
+      mtReset();
+      renderAll();
+      toast(`Logged ${secsToHMS(logged)} across ${count} task${count === 1 ? '' : 's'}.`, 'success');
+    }
+
+
+    /* ---- multi-task wiring ---- */
+    mtUI.toggle.addEventListener('click', () => {
+      if (!mt.on) { mtOpenPicker(); return; }
+      /* turning it off mid-session means logging what was tracked */
+      if (mtElapsedSecs() >= 1) { mtOpenDialog(); return; }
+      mtReset();
+    });
+    mtUI.pause.addEventListener('click', () => mtSetRunning(!mt.running));
+    mtUI.stop.addEventListener('click', () => {
+      if (mtElapsedSecs() < 1) { toast('Nothing tracked yet.', 'info'); return; }
+      mtOpenDialog();
+    });
+    mtPick.search.addEventListener('input', () => { mt.pickSearch = mtPick.search.value; mtRenderPick(); });
+    mtPick.cancel.addEventListener('click', mtClosePicker);
+    mtPick.close.addEventListener('click', mtClosePicker);
+    mtPick.start.addEventListener('click', () => {
+      if (mt.pickSel.size < 2) return;
+      mt.session = [...mt.pickSel];
+      mtClosePicker();
+      mtStart();
+      toast(`Multi-Task started across ${mt.session.length} tasks.`, 'info');
+    });
+
+    document.getElementById('mtMemoSave').addEventListener('click', mtSaveMemo);
+    document.getElementById('mtMemoCancel').addEventListener('click', mtCloseMemo);
+    document.getElementById('mtMemoClose').addEventListener('click', mtCloseMemo);
+    document.getElementById('mtMemoScrim').addEventListener('click', mtCloseMemo);
+    document.getElementById('mtMemoText').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); mtSaveMemo(); }
+    });
+    mtUI.save.addEventListener('click', () => { if (!mtUI.save.disabled) mtCommit(); });
+    mtUI.discard.addEventListener('click', () => {
+      closeModal('mtModal');
+      mtReset();
+      toast('Session discarded. Nothing logged.', 'info');
+    });
+    document.querySelector('[data-close-modal="mtModal"]').addEventListener('click', () => {
+      /* closing the dialog keeps the session alive so nothing is lost */
+      closeModal('mtModal');
+      if (mt.on) { mtUI.bar.classList.add('show'); toast('Session paused — stop again to log.', 'info'); }
+    });
+
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
+        /* innermost layer first: memo dialog closes without killing the session */
+        if (document.getElementById('mtMemoModal').classList.contains('open')) {
+          event.stopPropagation();
+          mtCloseMemo();
+          return;
+        }
         closeFilterMenus();
         ui.columnsPop.classList.remove('open');
         if (document.querySelector('.modal.open')) closeModal('taskModal');
@@ -2850,24 +3546,32 @@
   .module-switch button:hover { border-color: var(--primary); background: var(--primary-light); }
 
   /* ---- toolbar (shares Tasks search shell markup/behaviour) ---- */
-  .todo-toolbar { display: none; align-items: center; gap: 12px; width: 100%; }
+  .todo-toolbar { display: none; align-items: center; gap: 10px; width: 100%; }
+  .todo-toolbar-btn { width: auto; min-width: 0; height: 32px; padding: 0 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--body); font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .todo-toolbar-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .todo-toolbar-btn svg { flex: 0 0 auto; }
+  .todo-sort-menu { position: relative; }
   .page.show-todo .toolbar > .search-wrap,
   .page.show-todo .toolbar > .toolbar-right { display: none; }
+  .page.show-todo .toolbar { padding: 0; border: 0; background: transparent; min-height: 0; }
+  .page.show-todo { padding: 0; gap: 0; }
+  .page.show-todo .toolbar { padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--card); }
+  .page.show-todo .content-area { border: 0; border-radius: 0; background: var(--card); }
   .page.show-todo .todo-toolbar { display: flex; }
-  .todo-toolbar .search-wrap { position: relative; flex: 1 1 420px; max-width: 460px; min-width: 260px; }
+  .todo-toolbar .search-wrap { position: relative; flex: 0 1 380px; min-width: 220px; }
   .todo-toolbar-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
   .todo-action { height: 28px; padding: 0 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--card); color: var(--primary); font-size: 11px; font-weight: 700; }
   .todo-action:hover { border-color: var(--primary); background: var(--primary-light); }
 
   /* ---- shell / grid ---- */
-  .todo-shell { display: none; height: 100%; min-height: 0; }
-  .todo-shell.active { display: grid; grid-template-columns: 250px minmax(0, 1fr); background: var(--card); }
+  .todo-shell { display: none; height: 100%; min-height: 0; min-width: 0; }
+  .todo-shell.active { display: grid; grid-template-columns: 250px minmax(0, 1fr); background: var(--card); width: 100%; min-width: 0; flex: 1 1 auto; }
   .todo-shell.detail-open { grid-template-columns: 260px minmax(0, 1fr) 360px; }
   .content-area.todo-active { padding: 0; overflow: hidden; }
   .content-area.todo-active > :not(.todo-shell) { display: none !important; }
 
   /* ---- sidebar ---- */
-  .todo-sidebar { display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden; padding: 16px 8px 12px; background: var(--card); border-right: 1px solid var(--border); }
+  .todo-sidebar { display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-x: hidden; padding: 12px 8px; background: var(--card); border-right: 1px solid var(--border); }
   .todo-nav { display: grid; gap: 1px; }
   .todo-nav-item { position: relative; width: 100%; height: 34px; display: flex; align-items: center; gap: 12px; padding: 0 12px 0 12px; border: 0; border-radius: 6px; background: transparent; color: var(--heading); font-size: 12px; text-align: left; white-space: nowrap; overflow: hidden; transition: background .12s ease; }
   .todo-nav-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -2882,16 +3586,12 @@
   .todo-list-item { position: relative; }
   .todo-list-item .todo-nav-item { padding-right: 12px; }
   .todo-list-item:hover .todo-nav-count { visibility: hidden; }
-  .todo-list-dot { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; }
   .todo-list-delete { position: absolute; top: 5px; right: 6px; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 6px; background: transparent; color: var(--subtle); font-size: 15px; opacity: 0; transition: opacity .12s ease, background .12s ease, color .12s ease; }
   .todo-list-item:hover .todo-list-delete, .todo-list-item.active .todo-list-delete { opacity: 1; }
   .todo-list-delete:hover { background: var(--destructive-light); color: var(--destructive); }
   .todo-sidebar-foot { padding-top: 10px; }
   .todo-foot-row { display: flex; align-items: center; gap: 4px; }
   .todo-foot-row .todo-new-list { flex: 1; min-width: 0; }
-  .todo-new-group { width: 32px; height: 34px; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 6px; background: transparent; color: var(--primary); }
-  .todo-new-group:hover { background: var(--surface); }
-  .todo-new-group svg { width: 16px; height: 16px; display: block; }
   .todo-new-list { width: 100%; height: 34px; display: flex; align-items: center; gap: 10px; padding: 0 12px; border: 0; border-radius: 6px; background: transparent; color: var(--primary); font-size: 12px; font-weight: 600; text-align: left; }
   .todo-new-list:hover { background: var(--surface); }
   .todo-inline-list-form { display: flex; align-items: center; gap: 10px; height: 34px; padding: 0 12px; border: 1px solid var(--primary); border-radius: 6px; background: var(--card); }
@@ -2899,16 +3599,8 @@
 
   /* ---- workspace + colored header band (MS To Do signature) ---- */
   .todo-workspace { display: flex; flex-direction: column; min-width: 0; min-height: 0; background: var(--card); }
-  .todo-header { flex: 0 0 auto; padding: 18px 28px 14px; background: transparent; border-bottom: 1px solid var(--border-light); }
-  .todo-header-top { display: flex; align-items: center; gap: 10px; }
-  .todo-header-icon { width: 20px; height: 20px; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; color: var(--heading); }
-  .todo-header-icon svg { width: 19px; height: 19px; display: block; }
-  .todo-header-titles { min-width: 0; }
-  .todo-title { margin: 0; color: var(--heading); font-size: 19px; font-weight: 700; letter-spacing: -.01em; line-height: 1.25; }
-  .todo-subtitle { margin: 2px 0 0; color: var(--primary); font-size: 11px; }
-  .todo-header-actions { margin-left: auto; display: flex; align-items: center; gap: 4px; }
-  .todo-header-btn { height: 30px; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px; border: 0; border-radius: 6px; background: transparent; color: var(--body); font-size: 12px; }
-  .todo-header-btn:hover { background: var(--surface); color: var(--heading); }
+  .todo-header-btn { height: 32px; padding: 0 12px; display: inline-flex; align-items: center; gap: 6px; border: 0; border-radius: 8px; background: transparent; color: var(--body); font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+  .todo-header-btn:hover { background: var(--surface); color: var(--primary); }
   .todo-sort-menu { position: relative; }
   .todo-sort-pop { position: absolute; top: calc(100% + 6px); right: 0; z-index: 60; width: 200px; padding: 4px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); display: none; }
   .todo-sort-pop.open { display: block; }
@@ -2917,7 +3609,7 @@
   .todo-sort-pop button.active { color: var(--primary); font-weight: 700; }
 
   /* ---- body / composer / rows ---- */
-  .todo-body { flex: 1; min-height: 0; overflow: auto; padding: 16px 28px 28px; }
+  .todo-body { flex: 1; min-height: 0; overflow: auto; padding: 14px 20px 24px; }
   .todo-body-inner { max-width: none; }
   .todo-composer { margin-bottom: 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); overflow: visible; transition: border-color .15s ease; }
   .todo-composer:focus-within { border-color: var(--primary); }
@@ -3001,6 +3693,36 @@
   .todo-star { align-self: center; width: 28px; height: 28px; flex: 0 0 auto; border: 0; border-radius: 6px; background: transparent; color: var(--subtle); font-size: 15px; line-height: 1; }
   .todo-star:hover { color: var(--heading); }
   .todo-star.on { color: var(--primary); }
+  .todo-viewtabs { flex: 0 0 auto; }
+  .todo-viewtabs button { width: 30px; padding: 0; }
+  .todo-grid-wrap { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--card); }
+  .todo-grid { width: 100%; border-collapse: collapse; }
+  .todo-grid thead th { padding: 10px 14px; text-align: left; color: var(--subtle); font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; background: var(--surface); border-bottom: 1px solid var(--border); white-space: nowrap; }
+  .todo-grid tbody td { padding: 0 14px; height: 46px; max-width: 0; border-bottom: 1px solid var(--border-light); font-size: 12px; color: var(--heading); vertical-align: middle; }
+  .todo-grid tbody tr:last-child td { border-bottom: 0; }
+  .todo-grid tbody tr { cursor: pointer; transition: background .12s ease; }
+  .todo-grid tbody tr:hover { background: var(--surface); }
+  .todo-grid tbody tr.selected { background: var(--primary-light); }
+  .todo-grid tbody tr.completed .todo-grid-title { color: var(--subtle); text-decoration: line-through; }
+  .todo-grid tbody tr.dragging { opacity: .4; }
+  .todo-grid tbody tr.drop-above td { box-shadow: inset 0 2px 0 -1px var(--primary); }
+  .todo-grid tbody tr.drop-below td { box-shadow: inset 0 -2px 0 -1px var(--primary); }
+  .todo-grid .col-check { width: 44px; padding-right: 0; }
+  .todo-grid .col-project { width: 130px; color: var(--body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .todo-grid .col-assignee { width: 110px; }
+  .todo-grid .col-list { width: 130px; color: var(--body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .todo-grid .col-due { width: 120px; }
+  .todo-grid .col-imp { width: 100px; text-align: center; }
+  .todo-grid th.col-imp { text-align: center; }
+  .todo-grid .col-imp .todo-star { margin: 0 auto; }
+  .todo-grid .col-assignee .todo-avatar-stack { display: inline-flex; }
+  .todo-grid { table-layout: fixed; }
+  .todo-grid td.col-title { min-width: 0; }
+  .todo-grid-cell { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+  .todo-grid-title { flex: 0 1 auto; min-width: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .todo-grid-sub { flex: 0 0 auto; color: var(--subtle); font-size: 10px; }
+  .todo-grid-overdue { color: var(--destructive); font-weight: 700; }
+  .todo-grid-muted { color: var(--subtle); }
   .todo-empty { padding: 56px 20px; text-align: center; color: var(--subtle); }
   .todo-empty-icon { font-size: 30px; opacity: .5; }
   .todo-empty h3 { margin: 12px 0 4px; color: var(--heading); font-size: 14px; }
@@ -3165,6 +3887,7 @@
     filterValue: null,
     sort: 'smart',
     sortOpen: false,
+    view: 'grid',
     drag: null,
     addingList: false,
     groupCounter: 0,
@@ -3299,7 +4022,7 @@
     if (key === 'all') return [`<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 4.5h10M3 8h10M3 11.5h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>`, 'All', 'Everything still on your list.'];
     if (key === 'completed') return [`<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.4l3.2 3.2L13 4.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`, 'Completed', 'Completed tasks stay here for reference.'];
     const l = state.lists.find((x) => x.id === key);
-    return [`<span class="todo-list-dot" style="background:${l?.color || '#4d7cfe'}"></span>`, l?.name || 'List', 'Your personal task list.'];
+    return ['', l?.name || 'List', 'Your personal task list.'];
   }
 
   /* ---------- toolbar (Tasks-identical search shell) ---------- */
@@ -3311,7 +4034,7 @@
 
   const switcher = document.createElement('div');
   switcher.className = 'module-switch';
-  switcher.innerHTML = '<button type="button" id="openTodo">Open ToDo →</button>';
+  switcher.style.display = 'none';
   toolbar.append(switcher);
 
   const todoToolbar = document.createElement('div');
@@ -3334,8 +4057,65 @@
         <div id="todoSubItems"></div>
       </div>
     </div>
-    <div class="todo-toolbar-actions"><button class="todo-action" id="todoBackToTasks">← Tasks</button></div>`;
+    <div class="segmented todo-viewtabs" id="todoViewTabs">
+      <button type="button" data-todo-view="grid" title="Grid view" aria-label="Grid view">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.5" y="3" width="3.5" height="10" rx="1" stroke="currentColor" stroke-width="1.4"></rect><rect x="6.25" y="3" width="3.5" height="10" rx="1" stroke="currentColor" stroke-width="1.4"></rect><rect x="10" y="3" width="3.5" height="10" rx="1" stroke="currentColor" stroke-width="1.4"></rect></svg>
+      </button>
+      <button type="button" data-todo-view="list" title="List view" aria-label="List view">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.5" y="3" width="3" height="3" rx="0.8" stroke="currentColor" stroke-width="1.3"></rect><rect x="2.5" y="10" width="3" height="3" rx="0.8" stroke="currentColor" stroke-width="1.3"></rect><path d="M7.2 4.5H13.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path><path d="M7.2 11.5H13.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg>
+      </button>
+    </div>
+    <div class="todo-sort-menu">
+      <button class="todo-toolbar-btn" id="todoSortBtn" title="Sort">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4.5 3v10M4.5 3 2.6 5M4.5 3l1.9 2M11.5 13V3M11.5 13l1.9-2M11.5 13l-1.9-2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Sort
+      </button>
+      <div class="todo-sort-pop" id="todoSortPop"></div>
+    </div>
+    <button class="todo-toolbar-btn" id="todoClearCompleted" title="Clear completed">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 4.5h10M6.5 4.5V3.2c0-.4.3-.7.7-.7h1.6c.4 0 .7.3.7.7v1.3M4.4 4.5l.5 8c0 .5.4.9.9.9h4.4c.5 0 .9-.4.9-.9l.5-8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Clear completed
+    </button>
+    `;
   toolbar.append(todoToolbar);
+
+  const SORT_OPTIONS = [['smart', 'Smart'], ['manual', 'My order'], ['important', 'Importance'], ['due', 'Due date'], ['name', 'Alphabetically'], ['created', 'Creation date']];
+  const sortBtn = todoToolbar.querySelector('#todoSortBtn');
+  const sortPop = todoToolbar.querySelector('#todoSortPop');
+  function renderSortMenu() {
+    sortPop.innerHTML = SORT_OPTIONS.map(([k, label]) =>
+      `<button type="button" data-sort="${k}" class="${state.sort === k ? 'active' : ''}">${label}</button>`).join('');
+    sortPop.querySelectorAll('[data-sort]').forEach((b) => b.addEventListener('click', () => {
+      state.sort = b.dataset.sort;
+      sortPop.classList.remove('open');
+      renderSortMenu();
+      render();
+    }));
+  }
+  renderSortMenu();
+  sortBtn.addEventListener('click', (e) => { e.stopPropagation(); sortPop.classList.toggle('open'); });
+  document.addEventListener('mousedown', (e) => {
+    if (!e.target.closest('.todo-sort-menu')) sortPop.classList.remove('open');
+  });
+  todoToolbar.querySelector('#todoClearCompleted').addEventListener('click', () => {
+    const count = state.tasks.filter((t) => t.completed).length;
+    if (!count) return toast('No completed to-dos to clear.');
+    state.tasks = state.tasks.filter((t) => !t.completed);
+    state.selected = null;
+    toast(`Cleared ${count} completed to-do${count === 1 ? '' : 's'}.`);
+    render();
+  });
+
+  const viewTabs = todoToolbar.querySelector('#todoViewTabs');
+  function syncViewTabs() {
+    viewTabs.querySelectorAll('[data-todo-view]').forEach((b) =>
+      b.classList.toggle('active', b.dataset.todoView === state.view));
+  }
+  viewTabs.querySelectorAll('[data-todo-view]').forEach((b) => b.addEventListener('click', () => {
+    state.view = b.dataset.todoView;
+    syncViewTabs();
+    render();
+  }));
 
   const ui = {
     searchWrap: todoToolbar.querySelector('#todoSearchWrap'),
@@ -3412,10 +4192,10 @@
     return `<aside class="todo-sidebar">
       <div class="todo-nav">${SMART.map(([id, icon, name]) => `<button class="todo-nav-item ${state.active === id ? 'active' : ''}" data-view="${id}"><span class="todo-nav-icon">${icon}</span><span class="todo-nav-label">${name}</span><span class="todo-nav-count">${taskCount(id) || ''}</span></button>`).join('')}</div>
       <div class="todo-nav-divider"></div>
-      <div class="todo-lists">${state.lists.map((l) => `<div class="todo-list-item ${state.active === l.id ? 'active' : ''}"><button class="todo-nav-item ${state.active === l.id ? 'active' : ''}" data-view="${l.id}"><span class="todo-nav-icon"><span class="todo-list-dot" style="background:${l.color}"></span></span><span class="todo-nav-label">${esc(l.name)}</span><span class="todo-nav-count">${taskCount(l.id) || ''}</span></button>${l.id !== 'personal' ? `<button class="todo-list-delete" data-delete-list="${l.id}" aria-label="Delete ${esc(l.name)}">×</button>` : ''}</div>`).join('')}</div>
+      <div class="todo-lists">${state.lists.map((l) => `<div class="todo-list-item ${state.active === l.id ? 'active' : ''}"><button class="todo-nav-item ${state.active === l.id ? 'active' : ''}" data-view="${l.id}"><span class="todo-nav-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 4.5h10M3 8h10M3 11.5h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span><span class="todo-nav-label">${esc(l.name)}</span><span class="todo-nav-count">${taskCount(l.id) || ''}</span></button>${l.id !== 'personal' ? `<button class="todo-list-delete" data-delete-list="${l.id}" aria-label="Delete ${esc(l.name)}">×</button>` : ''}</div>`).join('')}</div>
       <div class="todo-sidebar-foot">${state.addingList
-        ? `<form class="todo-inline-list-form" id="todoInlineListForm"><span class="todo-list-dot" style="background:#2564cf"></span><input id="todoInlineListName" maxlength="40" autocomplete="off" placeholder="List name" aria-label="List name"></form>`
-        : `<div class="todo-foot-row"><button class="todo-new-list" id="todoNewList"><span class="todo-nav-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>New list</button><button class="todo-new-group" id="todoNewGroup" title="New group" aria-label="New group"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 5.2c0-.7.6-1.2 1.2-1.2h2.1l1.2 1.4h5.3c.7 0 1.2.6 1.2 1.2v5.2c0 .7-.6 1.2-1.2 1.2H3.7c-.7 0-1.2-.6-1.2-1.2V5.2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M11 8.4v3M9.5 9.9h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></button></div>`}</div>
+        ? `<form class="todo-inline-list-form" id="todoInlineListForm"><span class="todo-nav-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 4.5h10M3 8h10M3 11.5h6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span><input id="todoInlineListName" maxlength="40" autocomplete="off" placeholder="List name" aria-label="List name"></form>`
+        : `<div class="todo-foot-row"><button class="todo-new-list" id="todoNewList"><span class="todo-nav-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3.5v9M3.5 8h9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>New list</button></div>`}</div>
     </aside>`;
   }
 
@@ -3442,6 +4222,35 @@
       <div class="todo-row-main"><div class="todo-row-title">${esc(t.title)}</div>${metaFor(t, showList)}</div>
       <button class="todo-star ${t.important ? 'on' : ''}" data-star="${t.id}" aria-label="Mark important">${t.important ? '★' : '☆'}</button>
     </article>`;
+  }
+
+  function gridView() {
+    const items = getVisible();
+    if (!items.length) {
+      const searching = state.search.trim() || state.filterType;
+      return `<div class="todo-empty"><div class="todo-empty-icon">${searching ? '⌕' : '☺'}</div><h3>${searching ? 'No matching to-dos' : 'Nothing here yet'}</h3><p>${searching ? 'Try another term or clear the filter.' : 'Add a to-do above to get started.'}</p></div>`;
+    }
+    const showList = ['myday', 'important', 'planned', 'all', 'completed'].includes(state.active) || Boolean(state.search.trim()) || Boolean(state.filterType);
+    return `<div class="todo-grid-wrap"><table class="todo-grid">
+      <thead><tr>
+        <th class="col-check"></th>
+        <th>Title</th>
+        <th class="col-project">Project</th>
+        <th class="col-assignee">Assignee</th>
+        <th class="col-list">List</th>
+        <th class="col-due">Due Date</th>
+        <th class="col-imp">Importance</th>
+      </tr></thead>
+      <tbody>${items.map((t) => `<tr class="${t.completed ? 'completed' : ''} ${state.selected === t.id ? 'selected' : ''}" data-task="${t.id}" draggable="true">
+        <td class="col-check"><button class="todo-check ${t.completed ? 'done' : ''}" data-complete="${t.id}" aria-label="Complete"></button></td>
+        <td class="col-title"><span class="todo-grid-cell"><span class="todo-grid-title">${esc(t.title)}</span>${t.steps?.length ? `<span class="todo-grid-sub">${t.steps.filter((x) => x.done).length} of ${t.steps.length}</span>` : ''}</span></td>
+        <td class="col-project">${t.project ? esc(t.project) : '<span class="todo-grid-muted">—</span>'}</td>
+        <td class="col-assignee">${t.assignees?.length ? avatarStack(t.assignees) : '<span class="todo-grid-muted">—</span>'}</td>
+        <td class="col-list">${showList ? esc(state.lists.find((l) => l.id === t.list)?.name || 'Personal') : ''}</td>
+        <td class="col-due">${t.due ? `<span class="${isOverdue(t) ? 'todo-grid-overdue' : ''}">${new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(t.due + 'T12:00:00'))}</span>` : '<span class="todo-grid-muted">—</span>'}</td>
+        <td class="col-imp"><button class="todo-star ${t.important ? 'on' : ''}" data-star="${t.id}" aria-label="Mark important">${t.important ? '★' : '☆'}</button></td>
+      </tr>`).join('')}</tbody>
+    </table></div>`;
   }
 
   function tasksView() {
@@ -3534,27 +4343,9 @@
     const [icon, title, sub] = listMeta(state.active);
     const filtering = state.search.trim() || state.filterType;
     return `<main class="todo-workspace">
-      <div class="todo-header">
-        <div class="todo-header-top">
-          <span class="todo-header-icon">${icon}</span>
-          <div class="todo-header-titles">
-            <h1 class="todo-title">${esc(filtering ? 'Search results' : title)}</h1>
-            <p class="todo-subtitle">${esc(filtering ? `${getVisible().length} to-do(s) across all lists` : sub)}</p>
-          </div>
-          <div class="todo-header-actions">
-            <div class="todo-sort-menu">
-              <button class="todo-header-btn" id="todoSortBtn">↕ Sort</button>
-              <div class="todo-sort-pop ${state.sortOpen ? 'open' : ''}" id="todoSortPop">
-                ${[['smart', 'Smart'], ['manual', 'My order'], ['important', 'Importance'], ['due', 'Due date'], ['name', 'Alphabetically'], ['created', 'Creation date']].map(([k, label]) => `<button data-sort="${k}" class="${state.sort === k ? 'active' : ''}">${label}</button>`).join('')}
-              </div>
-            </div>
-            <button class="todo-header-btn" id="todoClearCompleted">Clear completed</button>
-          </div>
-        </div>
-      </div>
       <div class="todo-body"><div class="todo-body-inner">
         ${state.active === 'completed' ? '' : composer()}
-        ${tasksView()}
+        ${state.view === 'grid' ? gridView() : tasksView()}
       </div></div>
     </main>`;
   }
@@ -3641,7 +4432,7 @@
   /* Native tooltip only where the text is actually clipped, so hovering
      a short title does not pop an unnecessary tooltip. */
   function applyOverflowTooltips() {
-    shell.querySelectorAll('.todo-row-title, .todo-row-meta, .todo-detail-title, .todo-step-input').forEach((el) => {
+    shell.querySelectorAll('.todo-row-title, .todo-row-meta, .todo-detail-title, .todo-step-input, .todo-grid-title, .todo-grid .col-list, .todo-grid .col-project').forEach((el) => {
       const clipped = el.scrollWidth > el.clientWidth + 1;
       if (clipped) el.setAttribute('title', el.value !== undefined ? el.value : el.textContent.trim());
       else el.removeAttribute('title');
@@ -3652,6 +4443,7 @@
     shell.classList.toggle('detail-open', Boolean(state.tasks.find((x) => x.id === state.selected)));
     shell.innerHTML = sidebar() + workspace() + detail();
     renderChips();
+    syncViewTabs();
     bind();
     applyOverflowTooltips();
     if (state.focusNextStep) {
@@ -3958,32 +4750,58 @@
     });
 
     /* header */
-    const sortBtn = q('#todoSortBtn');
-    if (sortBtn) sortBtn.addEventListener('click', (e) => { e.stopPropagation(); state.sortOpen = !state.sortOpen; render(); });
-    qa('[data-sort]').forEach((b) => b.addEventListener('click', () => { state.sort = b.dataset.sort; state.sortOpen = false; render(); }));
-    const clearCompleted = q('#todoClearCompleted');
-    if (clearCompleted) clearCompleted.addEventListener('click', () => {
-      const count = state.tasks.filter((t) => t.completed).length;
-      if (!count) return toast('No completed to-dos to clear.');
-      state.tasks = state.tasks.filter((t) => !t.completed);
-      state.selected = null;
-      toast(`Cleared ${count} completed to-do${count === 1 ? '' : 's'}.`);
-      render();
+
+    /* grid rows share the same select / drag behaviour as list rows */
+    qa('.todo-grid tbody tr').forEach((row) => {
+      row.addEventListener('click', (e) => {
+        if (e.target.closest('button')) return;
+        state.selected = row.dataset.task;
+        state.detailMenu = '';
+        state.confirmDelete = false;
+        render();
+      });
+      row.addEventListener('dragstart', (e) => {
+        state.drag = row.dataset.task;
+        row.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        try { e.dataTransfer.setData('text/plain', row.dataset.task); } catch (err) {}
+      });
+      row.addEventListener('dragend', () => {
+        state.drag = null;
+        row.classList.remove('dragging');
+        qa('.todo-grid tbody tr').forEach((r) => r.classList.remove('drop-above', 'drop-below'));
+      });
+      row.addEventListener('dragover', (e) => {
+        if (!state.drag || row.dataset.task === state.drag) return;
+        e.preventDefault();
+        const box = row.getBoundingClientRect();
+        const above = (e.clientY - box.top) < box.height / 2;
+        row.classList.toggle('drop-above', above);
+        row.classList.toggle('drop-below', !above);
+      });
+      row.addEventListener('dragleave', () => row.classList.remove('drop-above', 'drop-below'));
+      row.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const targetId = row.dataset.task;
+        const dragId = state.drag;
+        qa('.todo-grid tbody tr').forEach((r) => r.classList.remove('drop-above', 'drop-below'));
+        if (!dragId || targetId === dragId) return;
+        const box = row.getBoundingClientRect();
+        const placeBefore = (e.clientY - box.top) < box.height / 2;
+        const visible = getVisible();
+        const moving = state.tasks.find((x) => x.id === dragId);
+        const ordered = visible.filter((x) => x.id !== dragId);
+        const at = ordered.findIndex((x) => x.id === targetId);
+        ordered.splice(placeBefore ? at : at + 1, 0, moving);
+        ordered.forEach((task, i) => { task.position = i + 1; });
+        state.drag = null;
+        state.sort = 'manual';
+        toast('Order updated.');
+        render();
+      });
     });
 
     /* new list */
-    const newGroupBtn = q('#todoNewGroup');
-    if (newGroupBtn) newGroupBtn.addEventListener('click', () => {
-      state.groupCounter += 1;
-      const colors = ['#7239ea', '#ffab2b', '#6dd230', '#4d7cfe', '#f8285a'];
-      const l = { id: 'group' + Date.now(), name: `Untitled group ${state.groupCounter}`, color: colors[state.lists.length % colors.length], isGroup: true };
-      state.lists.push(l);
-      state.active = l.id;
-      state.selected = null;
-      toast('Group created.');
-      render();
-    });
-
     const newListBtn = q('#todoNewList');
     if (newListBtn) newListBtn.addEventListener('click', () => { state.addingList = true; render(); shell.querySelector('#todoInlineListName')?.focus(); });
     const inlineForm = q('#todoInlineListForm');
@@ -4202,8 +5020,31 @@
     switcher.style.display = todo ? 'none' : '';
     if (todo && !booted) { booted = true; render(); }
   }
-  switcher.querySelector('#openTodo').addEventListener('click', () => openModule('todo'));
-  todoToolbar.querySelector('#todoBackToTasks').addEventListener('click', () => openModule('tasks'));
+
+
+  /* ---- app shell: sidebar nav drives the same module switch ---- */
+  const shellTitle = document.getElementById('shellTitle');
+  const shellNav = document.querySelectorAll('[data-shell-nav]');
+  function syncShellNav(name) {
+    shellNav.forEach((b) => b.classList.toggle('active', b.dataset.shellNav === name));
+    if (shellTitle) shellTitle.textContent = name === 'todo' ? 'ToDo' : 'Tasks';
+  }
+  shellNav.forEach((btn) => btn.addEventListener('click', () => {
+    const name = btn.dataset.shellNav;
+    openModule(name);
+    syncShellNav(name);
+  }));
+  /* keep the sidebar in step when the in-page buttons switch modules */
+  const baseOpenModule = openModule;
+  openModule = function shellAwareOpenModule(name) {
+    baseOpenModule(name);
+    syncShellNav(name);
+  };
+
+  const navCollapse = document.getElementById('navCollapse');
+  if (navCollapse) navCollapse.addEventListener('click', () => {
+    document.getElementById('appShell').classList.toggle('nav-collapsed');
+  });
 })();
 </script>
 </body>
