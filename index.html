@@ -1420,6 +1420,11 @@
     .side-icon { width: 18px; height: 18px; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; color: var(--subtle); }
     .side-item.active .side-icon { color: var(--warning); }
     .side-icon svg { width: 17px; height: 17px; display: block; }
+    .side-item.is-disabled { color: var(--subtle); cursor: not-allowed; }
+    .side-item.is-disabled:hover { background: transparent; }
+    .side-item.is-disabled .side-icon { color: #c3ccd8; }
+    .side-soon { margin-left: auto; padding: 2px 7px; border-radius: 999px; background: var(--surface-alt); color: var(--subtle); font-size: 9px; font-weight: 700; white-space: nowrap; }
+    .shell.nav-collapsed .side-soon { display: none; }
     .side-foot { padding: 12px 14px; border-top: 1px solid var(--border-light); color: var(--subtle); font-size: 10px; text-align: center; }
 
     .main { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
@@ -1572,11 +1577,12 @@
     </div>
     <nav class="side-nav">
       <div class="side-label">Work</div>
-      <button class="side-item active" data-shell-nav="tasks" type="button">
+      <button class="side-item is-disabled" data-shell-nav="tasks" type="button" disabled aria-disabled="true" title="Coming soon...">
         <span class="side-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="2.2" stroke="currentColor" stroke-width="1.4"/><path d="M5.6 8.2 7.2 9.8l3.4-3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span>Tasks</span>
+        <span class="side-soon">Coming soon...</span>
       </button>
-      <button class="side-item" data-shell-nav="todo" type="button">
+      <button class="side-item active" data-shell-nav="todo" type="button">
         <span class="side-icon"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 4.2h7.5M6 8h7.5M6 11.8h7.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="3" cy="4.2" r="1.1" fill="currentColor"/><circle cx="3" cy="8" r="1.1" fill="currentColor"/><circle cx="3" cy="11.8" r="1.1" fill="currentColor"/></svg></span>
         <span>ToDo</span>
       </button>
@@ -5026,10 +5032,12 @@
   const shellTitle = document.getElementById('shellTitle');
   const shellNav = document.querySelectorAll('[data-shell-nav]');
   function syncShellNav(name) {
-    shellNav.forEach((b) => b.classList.toggle('active', b.dataset.shellNav === name));
+    shellNav.forEach((b) => b.classList.toggle('active',
+      b.dataset.shellNav === name && !b.classList.contains('is-disabled')));
     if (shellTitle) shellTitle.textContent = name === 'todo' ? 'ToDo' : 'Tasks';
   }
   shellNav.forEach((btn) => btn.addEventListener('click', () => {
+    if (btn.disabled || btn.classList.contains('is-disabled')) return;
     const name = btn.dataset.shellNav;
     openModule(name);
     syncShellNav(name);
@@ -5040,6 +5048,10 @@
     baseOpenModule(name);
     syncShellNav(name);
   };
+
+  /* Tasks is disabled for now — open ToDo as the landing module. */
+  openModule('todo');
+  syncShellNav('todo');
 
   const navCollapse = document.getElementById('navCollapse');
   if (navCollapse) navCollapse.addEventListener('click', () => {
